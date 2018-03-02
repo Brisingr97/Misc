@@ -3,9 +3,9 @@ from twilio.rest import Client
 import datetime as dt
 import time
 start_time_of_application = time.time()
-account_sid = "ACa50028be5efc1b4d5c231e47fa77c467" #change it to your credentials
-from_number = "+15712817239"
-auth_token  = "19d21fb17e2fd4ea56ee95b3918e1a83"   # ----------------------------
+account_sid = os.environ["TWILIO_ACCOUNT_SID"] #change it to your credentials
+from_number = os.environ["TWILIO_FROM_NUMBER"]
+auth_token  = os.environ["TWILIO_AUTH_TOKEN"]   # ----------------------------
 client = Client(account_sid, auth_token)
 def send_message(client_val,to_num,from_num,body_val):
     message = client_val.messages.create(
