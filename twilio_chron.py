@@ -18,18 +18,21 @@ def send_message(client_val,to_num,from_num,body_val):
 
 failed_messages = []
 to_number = input("Enter your ph.number John: ")
-while(True):    
-    status_val = (send_message(client,to_number,from_number,"Your name is John, John."))   
-    counter = 0 
-    while(status_val[0]!="delivered"):
-        # wait for a second and try again
-        counter = counter+1
-        if(counter==4):
-            print("Not delivered, Tried.")
-            failed_messages = failed_messages + [status_val]
-            break
-        time.sleep(60)
-        status_val = (send_message(client,to_number,from_number,"Your name is John, John."))
+while(True):   
+    time_now = dt.datetime.today().hour
+    while(time_now<22 and time_now>6):
+        # however this method is buggy as it's the time of the server and not john, I couldn't find the API link to extract
+        # information about john's time zones.
+        status_val = (send_message(client,to_number,from_number,"Your name is John, John."))   
+        counter = 0 
+        while(status_val[0]!="delivered"):
+            # wait for a second and try again
+            counter = counter+1
+            if(counter==4):
+                print("Not delivered, Tried.")
+                failed_messages = failed_messages + [status_val]
+                break
+            time.sleep(60)
+            status_val = (send_message(client,to_number,from_number,"Your name is John, John."))
     time.sleep(3600)
-    print(str((time.time()-start_time_of_application)/3600)+" hours have passed since the program began")
-
+print(str((time.time()-start_time_of_application)/3600)+" hours have passed since the program began")
